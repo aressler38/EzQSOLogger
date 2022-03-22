@@ -23,7 +23,12 @@ RUN ${NVM_DIR}/nvm.sh install ${NODE_VERSION}
 RUN npm i -g azure-functions-core-tools@4 --unsafe-perm true
 RUN npm i -g @azure/static-web-apps-cli
 
-# ** [Optional] Uncomment this section to install additional packages. **
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
+RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+    && dpkg -i packages-microsoft-prod.deb \
+    && rm packages-microsoft-prod.deb
 
+RUN apt update \
+    && export DEBIAN_FRONTEND=noninteractive \
+    && apt install -y apt-transport-https \
+    && apt update \
+    && apt install -y dotnet-sdk-6.0

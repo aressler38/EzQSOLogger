@@ -1,0 +1,119 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "NPM: START",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/EzQSOLogger/app"
+      },
+      "command": "npm run start",
+      "isBackground": true,
+      "problemMatcher": null
+    },
+    {
+      "label": "NPM: BUILD",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/EzQSOLogger/app"
+      },
+      "command": "npm run build",
+      "problemMatcher": null
+    },
+    {
+      "label": "RUN APP",
+      "dependsOrder": "parallel",
+      "isBackground": true,
+      "dependsOn": [
+        "NPM: START",
+        "SWA: START"
+      ],
+    },
+    {
+      "label": "SWA: START",
+      "isBackground": true,
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/EzQSOLogger"
+      },
+      "command": " swa start --verbose --host 0.0.0.0 --app-location http://localhost:3000 --api-location ./api",
+      "problemMatcher": "$func-dotnet-watch"
+    },
+    {
+      "label": "clean (functions)",
+      "command": "dotnet",
+      "args": [
+        "clean",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "type": "process",
+      "problemMatcher": "$msCompile",
+      "options": {
+        "cwd": "${workspaceFolder}/EzQSOLogger/api"
+      }
+    },
+    {
+      "label": "build (functions)",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "type": "process",
+      "dependsOn": "clean (functions)",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": "$msCompile",
+      "options": {
+        "cwd": "${workspaceFolder}/EzQSOLogger/api"
+      }
+    },
+    {
+      "label": "clean release (functions)",
+      "command": "dotnet",
+      "args": [
+        "clean",
+        "--configuration",
+        "Release",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "type": "process",
+      "problemMatcher": "$msCompile",
+      "options": {
+        "cwd": "${workspaceFolder}/EzQSOLogger/api"
+      }
+    },
+    {
+      "label": "publish (functions)",
+      "command": "dotnet",
+      "args": [
+        "publish",
+        "--configuration",
+        "Release",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "type": "process",
+      "dependsOn": "clean release (functions)",
+      "problemMatcher": "$msCompile",
+      "options": {
+        "cwd": "${workspaceFolder}/EzQSOLogger/api"
+      }
+    },
+    {
+      "type": "func",
+      "dependsOn": "build (functions)",
+      "options": {
+        "cwd": "${workspaceFolder}/EzQSOLogger/api/bin/Debug/net6.0"
+      },
+      "command": "host start",
+      "isBackground": true,
+      "problemMatcher": "$func-dotnet-watch"
+    }
+  ]
+}
