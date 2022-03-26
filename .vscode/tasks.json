@@ -4,12 +4,28 @@
     {
       "label": "NPM: START",
       "type": "shell",
+      "isBackground": true,
       "options": {
         "cwd": "${workspaceFolder}/EzQSOLogger/app"
       },
       "command": "npm run start",
-      "isBackground": true,
-      "problemMatcher": null
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": ".",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".",
+            "endsPattern": "."
+          }
+        }
+      ]
     },
     {
       "label": "NPM: BUILD",
@@ -21,23 +37,95 @@
       "problemMatcher": null
     },
     {
-      "label": "RUN APP",
+      "label": "Combined tasks",
       "dependsOrder": "parallel",
+      "type": "shell",
+      "command": "echo ready",
+      "presentation": {
+        "echo": false,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": false
+      },
       "isBackground": true,
       "dependsOn": [
+        "SWA: START",
         "NPM: START",
-        "SWA: START"
+        "dotnet-func-host-start",
       ],
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": ".",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".",
+            "endsPattern": "."
+          }
+        }
+      ]
+    },
+    {
+      "label": "create self-signed cert",
+      "type": "shell",
+      "command": "if [ ! -e cert.pem ]; then openssl req -x509 -newkey rsa:4096 -nodes -keyout key.pem -out cert.pem -sha256 -days 365 -subj \"/C=US/ST=Ohio/L=Columbus/O=Company Name/OU=Org/CN=localhost\"; else echo 'cert exists already'; fi",
+      "options": {
+        "cwd": "${workspaceFolder}/EzQSOLogger"
+      },
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": ".",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".",
+            "endsPattern": "."
+          }
+        }
+      ]
     },
     {
       "label": "SWA: START",
       "isBackground": true,
       "type": "shell",
+      "dependsOn": [
+        "create self-signed cert"
+      ],
       "options": {
         "cwd": "${workspaceFolder}/EzQSOLogger"
       },
-      "command": " swa start --verbose --host 0.0.0.0 --app-location http://localhost:3000 --api-location ./api",
-      "problemMatcher": "$func-dotnet-watch"
+      "command": "swa start https://localhost:3000  --ssl true --host 0.0.0.0 --ssl-cert cert.pem --ssl-key key.pem --api-location http://localhost:7071 --devserver-timeout=90000",
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": ".",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".",
+            "endsPattern": "."
+          }
+        }
+      ]
     },
     {
       "label": "clean (functions)",
@@ -106,12 +194,16 @@
       }
     },
     {
-      "type": "func",
-      "dependsOn": "build (functions)",
+      "type": "shell",
+      "label": "dotnet-func-host-start",
+      "dependsOrder": "parallel",
+      "dependsOn": [
+        "build (functions)",
+      ],
       "options": {
-        "cwd": "${workspaceFolder}/EzQSOLogger/api/bin/Debug/net6.0"
+        "cwd": "${workspaceFolder}/EzQSOLogger/api"
       },
-      "command": "host start",
+      "command": "func host start",
       "isBackground": true,
       "problemMatcher": "$func-dotnet-watch"
     }

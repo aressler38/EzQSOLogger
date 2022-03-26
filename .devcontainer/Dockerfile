@@ -22,6 +22,7 @@ RUN ${NVM_DIR}/nvm.sh install ${NODE_VERSION}
 
 RUN npm i -g azure-functions-core-tools@4 --unsafe-perm true
 RUN npm i -g @azure/static-web-apps-cli
+RUN npm i -g azurite
 
 RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
     && dpkg -i packages-microsoft-prod.deb \

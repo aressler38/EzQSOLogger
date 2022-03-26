@@ -5,12 +5,14 @@
       "name": "Start App",
       "type": "coreclr",
       "request": "attach",
-      "preLaunchTask": "RUN APP",
+      "justMyCode": true,
+      "preLaunchTask": "Combined tasks",
       "processId": "${command:azureFunctions.pickProcess}"
     },
     {
       "name": "Attach to .NET Functions",
       "type": "coreclr",
+      "preLaunchTask": "func: host start",
       "request": "attach",
       "processId": "${command:azureFunctions.pickProcess}"
     }

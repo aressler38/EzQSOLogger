@@ -11,7 +11,11 @@
     }
   },
   // Set *default* container specific settings.json values on container create.
-  "settings": {},
+  "settings": {
+    "omnisharp.useModernNet": true,
+    "azureFunctions.pickProcessTimeout": 180,
+    "azureFunctions.validateFuncCoreTools": true
+  },
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
     "ms-azuretools.vscode-azurefunctions",
@@ -26,5 +30,6 @@
   // "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
   "remoteUser": "root",
-  "features": {}
+  "features": {},
+  "onCreateCommand": "cd EzQSOLogger/api && dotnet restore & cd EZQSOLogger/app && npm ci & wait"
 }

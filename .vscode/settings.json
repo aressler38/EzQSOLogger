@@ -1,8 +1,16 @@
 {
-	"azureFunctions.deploySubpath": "EzQSOLogger/api/bin/Release/net6.0/publish",
-	"azureFunctions.projectLanguage": "C#",
-	"azureFunctions.projectRuntime": "~4",
-	"debug.internalConsoleOptions": "neverOpen",
-	"azureFunctions.projectSubpath": "EzQSOLogger/api",
-	"azureFunctions.preDeployTask": "publish (functions)"
+  "azureFunctions.deploySubpath": "EzQSOLogger/api/bin/Release/net6.0/publish",
+  "azureFunctions.projectLanguage": "C#",
+  "azureFunctions.projectRuntime": "~4",
+  "debug.internalConsoleOptions": "neverOpen",
+  "azureFunctions.projectSubpath": "EzQSOLogger/api",
+  "azureFunctions.preDeployTask": "publish (functions)",
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "/staticwebapp.config.json"
+      ],
+      "url": "https://json.schemastore.org/staticwebapp.config.json"
+    }
+  ]
 }

@@ -4,18 +4,6 @@
   },
   "routes": [
     {
-      "route": "/profile*",
-      "allowedRoles": [
-        "authenticated"
-      ]
-    },
-    {
-      "route": "/admin/index.html",
-      "allowedRoles": [
-        "administrator"
-      ]
-    },
-    {
       "route": "/images/*",
       "headers": {
         "cache-control": "must-revalidate, max-age=15770000"
@@ -67,7 +55,7 @@
     }
   },
   "globalHeaders": {
-    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'"
+    "content-security-policy": "default-src https: wss: 'unsafe-eval' 'unsafe-inline'; object-src 'none'"
   },
   "mimeTypes": {
     ".json": "text/json"
