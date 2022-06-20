@@ -10,6 +10,13 @@
       }
     },
     {
+      "route": "/api/debug/*",
+      "methods": [
+        "GET"
+      ],
+      "allowedRoles": []
+    },
+    {
       "route": "/api/*",
       "methods": [
         "GET"

@@ -3,6 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  async function debug1() {
+    console.log('debug1')
+    var r = await fetch('/api/debug/debug1', { method: 'get' })
+    var data = await r.text()
+    console.log(data)
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -18,8 +24,8 @@ function App() {
         >
           How to Learn React
         </a>
-
         <h1>HELLO WORLD 2</h1>
+        <button onClick={() => debug1()}>Debug1</button>
       </header>
     </div>
   );
