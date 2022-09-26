@@ -9,26 +9,16 @@ SHELL ["/bin/bash", "--login", "-c"]
 # [Option] Install Node.js
 ARG INSTALL_NODE="true"
 ARG NODE_VERSION="lts/*"
-# nvm environment variables
-ENV NVM_DIR /usr/local/share/nvm
 
-# install nvm
-# https://github.com/creationix/nvm#install-script
-RUN mkdir -p $NVM_DIR && curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.1/install.sh | bash
-RUN chmod 777 ${NVM_DIR}/nvm.sh
-
-# install node and npm
-RUN ${NVM_DIR}/nvm.sh install ${NODE_VERSION}
-
-RUN npm i -g azure-functions-core-tools@4 --unsafe-perm true
-RUN npm i -g @azure/static-web-apps-cli
-RUN npm i -g azurite
+RUN apt update && apt install -y nodejs npm
+RUN npm config set unsafe-perm true
+RUN whoami && npm i -g \
+    azure-functions-core-tools@4 @azure/static-web-apps-cli azurite
 
 RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
     && dpkg -i packages-microsoft-prod.deb \
-    && rm packages-microsoft-prod.deb
-
-RUN apt update \
+    && rm packages-microsoft-prod.deb \
+    && apt update \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt install -y apt-transport-https \
     && apt update \
