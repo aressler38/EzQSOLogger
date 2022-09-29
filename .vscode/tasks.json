@@ -6,9 +6,9 @@
       "type": "shell",
       "isBackground": true,
       "options": {
-        "cwd": "${workspaceFolder}/EzQSOLogger/app"
+        "cwd": "${workspaceFolder}/EzQSOLogger/app/EzQSOLogger"
       },
-      "command": "npm run start",
+      "command": "npm run dev -- --host --port 3000",
       "problemMatcher": [
         {
           "pattern": [
@@ -31,7 +31,7 @@
       "label": "NPM: BUILD",
       "type": "shell",
       "options": {
-        "cwd": "${workspaceFolder}/EzQSOLogger/app"
+        "cwd": "${workspaceFolder}/EzQSOLogger/app/EzQSOLogger"
       },
       "command": "npm run build",
       "problemMatcher": null

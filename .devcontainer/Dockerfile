@@ -1,20 +1,17 @@
 # See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.224.2/containers/debian/.devcontainer/base.Dockerfile
+FROM mcr.microsoft.com/vscode/devcontainers/base:0-bullseye
 
-# [Choice] Debian version (use bullseye on local arm64/Apple Silicon): bullseye, buster
-ARG VARIANT="bullseye"
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
+RUN apt update && apt install -y build-essential curl software-properties-common
+# Setup nodejs
+RUN curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
 
-SHELL ["/bin/bash", "--login", "-c"]
+RUN apt update && apt install -y nodejs
 
-# [Option] Install Node.js
-ARG INSTALL_NODE="true"
-ARG NODE_VERSION="lts/*"
-
-RUN apt update && apt install -y nodejs npm
 RUN npm config set unsafe-perm true
-RUN whoami && npm i -g \
+RUN npm i -g \
     azure-functions-core-tools@4 @azure/static-web-apps-cli azurite
 
+# Setup .net6
 RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
     && dpkg -i packages-microsoft-prod.deb \
     && rm packages-microsoft-prod.deb \
