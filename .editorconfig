@@ -11,5 +11,5 @@ charset = utf-8
 trim_trailing_whitespace = true
 tab_width = 4
 
-[*.{json,tsx,css}]
+[*.{js,json,tsx,css,vue}]
 indent_size = 2
