@@ -2,8 +2,8 @@
 
 echo "Running onCreateCommand"
 
-cd EzQSOLogger/api
+cd EzQSOLogger
 dotnet restore
 
-cd ../app/EzQSOLogger
+cd app/EzQSOLogger
 npm ci

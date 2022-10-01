@@ -9,8 +9,12 @@
   // Set *default* container specific settings.json values on container create.
   "settings": {
     "omnisharp.useModernNet": true,
+    "omnisharp.enableRoslynAnalyzers": true,
     "azureFunctions.pickProcessTimeout": 180,
-    "azureFunctions.validateFuncCoreTools": true
+    "azureFunctions.validateFuncCoreTools": true,
+    "testExplorer.gutterDecoration": true,
+    "testExplorer.codeLens": true,
+    "testing.defaultGutterClickAction": "contextMenu",
   },
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
@@ -18,6 +22,8 @@
     "ms-dotnettools.csharp",
     "editorconfig.editorconfig",
     "vue.volar",
+    "Vue.vscode-typescript-vue-plugin",
+    "formulahendry.dotnet-test-explorer",
   ],
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],

@@ -12,5 +12,9 @@
       ],
       "url": "https://json.schemastore.org/staticwebapp.config.json"
     }
-  ]
+  ],
+  "testing.automaticallyOpenPeekView": "never",
+  "dotnet-test-explorer.showCodeLens": true,
+  "dotnet-test-explorer.treeMode": "flat",
+  "dotnet-test-explorer.testProjectPath": "EzQSOLogger/api.tests/*.csproj"
 }

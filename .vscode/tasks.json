@@ -2,6 +2,32 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "azurite",
+      "type": "shell",
+      "isBackground": true,
+      "command": [
+        "azurite"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/.azurite"
+      },
+      "problemMatcher": [
+        {
+          "pattern": {
+            "regexp": ".",
+            "file": 1,
+            "location": 2,
+            "message": 3
+          },
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".",
+            "endsPattern": "."
+          }
+        }
+      ]
+    },
+    {
       "label": "NPM: START",
       "type": "shell",
       "isBackground": true,
@@ -51,6 +77,7 @@
       },
       "isBackground": true,
       "dependsOn": [
+        "azurite",
         "SWA: START",
         "NPM: START",
         "dotnet-func-host-start",
@@ -201,7 +228,10 @@
         "build (functions)",
       ],
       "options": {
-        "cwd": "${workspaceFolder}/EzQSOLogger/api"
+        "cwd": "${workspaceFolder}/EzQSOLogger/api",
+        "env": {
+          "AzureWebJobsStorage": "${env:AZURITE_CONNECTION_STRING}",
+        }
       },
       "command": "func host start",
       "isBackground": true,
