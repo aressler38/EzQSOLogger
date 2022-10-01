@@ -10,17 +10,17 @@
       "processId": "${command:azureFunctions.pickProcess}"
     },
     {
-      "name": "Chrome",
+      "name": "Debug Browser",
       "type": "chrome",
       "request": "launch",
       "url": "https://localhost:4280",
-      "webRoot": "${workspaceRoot}/EzQSOLogger/app/src",
+      "webRoot": "${workspaceRoot}/EzQSOLogger/app/EzQSOLogger/src",
     },
     {
       "name": "Attach to .NET Functions",
       "type": "coreclr",
       "request": "attach",
       "processId": "${command:azureFunctions.pickProcess}"
-    }
+    },
   ]
 }
