@@ -10,6 +10,13 @@ export default defineConfig({
         https: {
             key: fs.readFileSync('../../key.pem'),
             cert: fs.readFileSync('../../cert.pem'),
+        },
+        watch: {
+            useFsEvents: false,
+
+            // Using polling in a docker container on WSL2
+            usePolling: true,
+            interval: 1000,
         }
     },
     plugins: [vue()],
