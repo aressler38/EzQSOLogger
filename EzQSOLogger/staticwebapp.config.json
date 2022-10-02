@@ -42,10 +42,6 @@
       "allowedRoles": [
         "authenticated"
       ]
-    },
-    {
-      "route": "/logout",
-      "redirect": "/.auth/logout"
     }
   ],
   "navigationFallback": {

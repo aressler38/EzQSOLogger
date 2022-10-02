@@ -17,6 +17,13 @@
     "testing.defaultGutterClickAction": "contextMenu",
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
+    "editor.defaultFormatter": "EditorConfig.EditorConfig",
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[vue]": {
+      "editor.defaultFormatter": "Vue.volar"
+    }
   },
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
@@ -26,6 +33,7 @@
     "vue.volar",
     "Vue.vscode-typescript-vue-plugin",
     "formulahendry.dotnet-test-explorer",
+    "esbenp.prettier-vscode"
   ],
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],

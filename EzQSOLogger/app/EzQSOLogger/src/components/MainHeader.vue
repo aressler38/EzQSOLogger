@@ -12,7 +12,10 @@ debugger;
   <w-toolbar height="2.875em" bg-color="blue-grey-light4" color="black" fixed>
     <RouterLink to="/" class="title2">EzQSOLogger</RouterLink>
     <div class="spacer"></div>
-    <RouterLink to="/me" v-if="userStore.user">Me</RouterLink>
-    <RouterLink to="/.auth/login/github" v-else>Login</RouterLink>
+    <template v-if="userStore.user">
+      <RouterLink to="/me">Me</RouterLink>
+      <RouterLink to="/logout">Logout</RouterLink>
+    </template>
+    <RouterLink to="/login" v-else>Login</RouterLink>
   </w-toolbar>
 </template>
