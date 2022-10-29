@@ -1,9 +1,10 @@
 #!/bin/bash
 
 echo "Running onCreateCommand"
+ROOT=/workspaces/EzQSOLogger
 
-cd EzQSOLogger
+cd $ROOT/EzQSOLogger
 dotnet restore
 
-cd app/EzQSOLogger
+cd $ROOT/app/EzQSOLogger
 npm ci
