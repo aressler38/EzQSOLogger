@@ -6,5 +6,5 @@ ROOT=/workspaces/EzQSOLogger
 cd $ROOT/EzQSOLogger
 dotnet restore
 
-cd $ROOT/app/EzQSOLogger
+cd $ROOT/EzQSOLogger/app/EzQSOLogger
 npm ci
