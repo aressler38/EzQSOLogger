@@ -1,14 +1,20 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
+import { getUserInfo, type ClientPrincipal } from "@/user/util";
 
+export type UserStoreState = {
+  user: null | ClientPrincipal;
+};
 
-export const useUserStore = defineStore('user', {
-    state: () => ({ user: null }),
-    getters: {
+export const useUserStore = defineStore("user", {
+  state: (): UserStoreState => ({
+    user: null,
+  }),
+  actions: {
+    setUser(user: ClientPrincipal) {
+      this.user = user;
     },
-    actions: {
-        setUser(user: any) {
-            this.$state.user = user
-        }
-    }
-
-})
+    async loadUser() {
+      this.setUser(await getUserInfo());
+    },
+  },
+});

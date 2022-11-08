@@ -4,6 +4,7 @@ import TheWelcome from '../components/TheWelcome.vue'
 <script lang="ts">
 
 export default {
+
   data() {
     return {
       counter: 0
@@ -13,6 +14,9 @@ export default {
     onClick() {
       ++this.counter;
     },
+  },
+  beforeRouteUpdate() {
+    console.log("HELLO")
   }
 }
 
