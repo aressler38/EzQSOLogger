@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { RouterLink, } from 'vue-router'
-import { useUserStore } from '@/stores/userStore'
-const userStore = useUserStore();
-var env = process.env.NODE_ENV;
-userStore.loadUser();
+import { useUserStore } from '@/stores/userStore';
+
+
+const userStore = useUserStore()
+
 </script>
 
 <template>
